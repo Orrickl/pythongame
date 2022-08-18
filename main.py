@@ -1,36 +1,44 @@
+# import GUI libraries
 from tkinter import *
-from tkinter import ttk
-import tkinter.font as font
-
-Main_menu = Tk()
-Main_menu.geometry('350x90')
-Main_menu.configure(bg='cyan')
-
-Main_main_menu = ttk.Frame()
-Main_main_menu.grid(row=1, column=0)
-Levels_frame = ttk.Frame(Main_menu)
-Levels_frame.grid(row=1, column=0)
-Levels_frame.grid_forget()
-
-def Levels_open():
-    Main_main_menu.grid_forget()
-    Levels_frame.grid(row=0, column=0)
-
-Game_label = ttk.Label(Main_menu, text= "Welcome To Math Bingo!", font="Helvetica 10 bold")
-Game_label.config(background="cyan")
-Game_label.place(x=92, y=25)
 
 
-Levels_button = ttk.Button(Main_menu, text="Levels", command=Levels_open)
-Levels_button.place(x=10, y=15)
+# defining functions
+def level_open():
+    main_menu.grid_forget()
+    level_menu.grid(row=0, column=0)
 
-Leaderboard_button = ttk.Button(Main_menu, text="leaderboards", command=Levels_open)
-Leaderboard_button.place(x=260, y=50)
 
-Collectibles_button = ttk.Button(Main_menu, text="collectibles", command=Levels_open)
-Collectibles_button.place(x=260, y=15)
+# defining windows
+root = Tk()
+root.geometry('1980x1080')
+root.configure(bg='cyan')
 
-Custom_Game_button = ttk.Button(Main_menu, text="custom game", command=Levels_open)
-Custom_Game_button.place(x=10, y=50)
+main_menu = Frame(root)
+main_menu.grid(row=0, column=0)
 
-Main_menu.mainloop()
+level_menu = Frame(root)
+level_menu.grid(row=0, column=0)
+level_menu.grid_forget()
+
+main_menu = Frame(root)
+main_menu.grid(row=1, column=2)
+
+# defining buttons and labels
+game_label = Label(main_menu, text="Welcome To Math Bingo!", font="Helvetica 40 bold")
+game_label.grid(row=1, column=2)
+
+levels_button = Button(main_menu, text="Levels", command=level_open, font="Helvetica 25")
+levels_button.grid(row=5, column=20)
+
+leaderboard_button = Button(main_menu, text="leaderboards", font="Helvetica 25")
+leaderboard_button.grid(row=10, column=20)
+
+collectibles_button = Button(main_menu, text="collectibles", font="Helvetica 25")
+collectibles_button.grid(row=15, column=20)
+
+custom_game_button = Button(main_menu, text="custom game", font="Helvetica 25")
+custom_game_button.grid(row=20, column=20)
+
+back_button = Button()
+
+root.mainloop()

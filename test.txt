@@ -1,1 +1,27 @@
 i am testing
+from tkinter import *
+from tkinter import ttk
+
+root = Tk()
+root.geometry('350x350')
+root.configure(bg='cyan')
+
+main_menu = ttk.Frame(root)
+main_menu.grid(column=0, row=0)
+
+game_label = ttk.Label(main_menu, text="Welcome To Math Bingo!", font="Helvetica 10 bold")
+game_label.place(x=92, y=25)
+
+levels_button = ttk.Button(main_menu, text="Levels")
+levels_button.place(x=10, y=15)
+
+leaderboard_button = ttk.Button(main_menu, text="leaderboards")
+leaderboard_button.place(x=260, y=50)
+
+collectibles_button = ttk.Button(main_menu, text="collectibles")
+collectibles_button.place(x=260, y=15)
+
+custom_game_button = ttk.Button(main_menu, text="custom game")
+custom_game_button.place(x=10, y=50)
+
+root.mainloop()
