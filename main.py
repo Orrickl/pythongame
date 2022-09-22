@@ -3,6 +3,7 @@ import random
 from tkinter import *
 from tkinter import ttk
 random_integers = []
+random_integers_products = []
 
 # defining functions
 def new_window(window_to_close, window_to_open):
@@ -71,21 +72,34 @@ def send_to_level(level_number):
     if chosen_difficulty.get() == "":
         chosen_difficulty.set("please enter a difficulty")
     elif chosen_difficulty.get() == "Easy":
+        level_difficulty_menu.grid_forget()
         One_Easy.grid(row=0, column=0)
         generate_level(level_number)
-        level_difficulty_menu.grid_forget()
+
 
 def generate_level(level_num):
     text1 = Text(One_Easy, width=47, height=1, bg='grey')
     text1.pack()
-    for i in range(50):
-        random_integers.append(random.randint(1, 12))
-    print(random_integers)
+    print("help")
+    first_rand_int = []
+    second_rand_int = []
+    first_and_second_product = 0
+
+    for i in range(25):
+        first_rand_int.append(random.randint(1,12))
+        second_rand_int.append(random.randint(1,12))
+        first_and_second_product = first_rand_int[i] * second_rand_int[i]
+        random_integers_products.append(first_and_second_product)
+
+
+    print(first_rand_int)
+    print(second_rand_int)
+    print(random_integers_products)
     #number set 1
     can1=Canvas(One_Easy,width=100,height=70,bg='white')
-    lab1=Label(can1, text="{}x{}".,width=10)
+    lab1=Label(can1, text=first_rand_int[0]*second_rand_int[0], width=10)
     lab1.pack()
-    lab2=Label(can1, text="HI!!!",width=10,)
+    lab2=Label(can1, text=first_rand_int[1]*second_rand_int[1], width=10,)
     lab2.pack()
     lab3=Label(can1, text="HI!!!",width=10)
     lab3.pack()
