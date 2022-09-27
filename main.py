@@ -4,6 +4,10 @@ from tkinter import *
 from tkinter import ttk
 random_integers = []
 random_integers_products = []
+first_rand_int = []
+second_rand_int = []
+equation_to_solve_number = 0
+label_list = []
 
 # defining functions
 def new_window(window_to_close, window_to_open):
@@ -78,7 +82,8 @@ def send_to_level(level_number):
 
 
 def generate_level(level_num):
-    text1 = Text(One_Easy, width=47, height=1, bg='grey')
+    global first_rand_int, second_rand_int, equation_to_solve_number
+    text1 = Label(One_Easy, textvariable=equation_to_solve, width=47, height=1, bg='grey')
     text1.pack()
     print("help")
     first_rand_int = []
@@ -90,77 +95,83 @@ def generate_level(level_num):
         second_rand_int.append(random.randint(1,12))
         first_and_second_product = first_rand_int[i] * second_rand_int[i]
         random_integers_products.append(first_and_second_product)
-
+    equation_to_solve_number = random.randint(0,24)
+    equation_to_solve.set(str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
 
     print(first_rand_int)
     print(second_rand_int)
     print(random_integers_products)
-    #number set 1
+
     can1=Canvas(One_Easy,width=100,height=70,bg='white')
-    lab1=Label(can1, text=first_rand_int[0]*second_rand_int[0], width=10)
+    lab1=Button(can1, text=first_rand_int[0]*second_rand_int[0], command=lambda: check_if_correct_table(0), width=10)
     lab1.pack()
-    lab2=Label(can1, text=first_rand_int[1]*second_rand_int[1], width=10,)
+    label_list.append(lab1)
+    lab2=Button(can1, text=first_rand_int[1]*second_rand_int[1], command=lambda: check_if_correct_table(1), width=10,)
     lab2.pack()
-    lab3=Label(can1, text="HI!!!",width=10)
+    lab3=Button(can1, text=first_rand_int[2]*second_rand_int[2], command=lambda: check_if_correct_table(2),width=10)
     lab3.pack()
-    lab4=Label(can1, text="HI!!!",width=10,)
+    lab4=Button(can1, text=first_rand_int[3]*second_rand_int[3], command=lambda: check_if_correct_table(3),width=10,)
     lab4.pack()
-    lab5=Label(can1, text="HI!!!",width=10)
+    lab5=Button(can1, text=first_rand_int[4]*second_rand_int[4], command=lambda: check_if_correct_table(4),width=10)
     lab5.pack()
     can1.pack(side=LEFT)
     #number set 2
     can2=Canvas(One_Easy,width=100,height=70,bg='white')
-    lab6=Label(can2, text="HI!!!",width=10)
+    lab6=Button(can2, text=first_rand_int[5]*second_rand_int[5], command=lambda: check_if_correct_table(5),width=10)
     lab6.pack()
-    lab7=Label(can2, text="HI!!!",width=10)
+    lab7=Button(can2, text=first_rand_int[6]*second_rand_int[6], command=lambda: check_if_correct_table(6),width=10)
     lab7.pack()
-    lab8=Label(can2, text="HI!!!",width=10)
+    lab8=Button(can2, text=first_rand_int[7]*second_rand_int[7], command=lambda: check_if_correct_table(7),width=10)
     lab8.pack()
-    lab9=Label(can2, text="HI!!!",width=10,)
+    lab9=Button(can2, text=first_rand_int[8]*second_rand_int[8], command=lambda: check_if_correct_table(8),width=10,)
     lab9.pack()
-    lab10=Label(can2, text="HI!!!",width=10)
+    lab10=Button(can2, text=first_rand_int[9]*second_rand_int[9], command=lambda: check_if_correct_table(9),width=10)
     lab10.pack()
     can2.pack(side=LEFT)
     #number set 1
     can3=Canvas(One_Easy,width=100,height=70,bg='white')
-    lab11=Label(can3, text="HI!!!",width=10)
+    lab11=Button(can3, text=first_rand_int[10]*second_rand_int[10], command=lambda: check_if_correct_table(10),width=10)
     lab11.pack()
-    lab12=Label(can3, text="HI!!!",width=10)
+    lab12=Button(can3, text=first_rand_int[11]*second_rand_int[11], command=lambda: check_if_correct_table(11),width=10)
     lab12.pack()
-    lab13=Label(can3, text="HI!!!",width=10)
+    lab13=Button(can3, text=first_rand_int[12]*second_rand_int[12], command=lambda: check_if_correct_table(12),width=10)
     lab13.pack()
-    lab14=Label(can3, text="HI!!!",width=10,)
+    lab14=Button(can3, text=first_rand_int[13]*second_rand_int[13], command=lambda: check_if_correct_table(13),width=10,)
     lab14.pack()
-    lab15=Label(can3, text="HI!!!",width=10)
+    lab15=Button(can3, text=first_rand_int[14]*second_rand_int[14], command=lambda: check_if_correct_table(14),width=10)
     lab15.pack()
     can3.pack(side=LEFT)
     can4=Canvas(One_Easy,width=100,height=70,bg='white')
-    lab16=Label(can4, text="HI!!!",width=10)
+    lab16=Button(can4, text=first_rand_int[15]*second_rand_int[15], command=lambda: check_if_correct_table(15),width=10)
     lab16.pack()
-    lab17=Label(can4, text="HI!!!",width=10,)
+    lab17=Button(can4, text=first_rand_int[16]*second_rand_int[16], command=lambda: check_if_correct_table(16), width=10,)
     lab17.pack()
-    lab18=Label(can4, text="HI!!!",width=10)
+    lab18=Button(can4, text=first_rand_int[17]*second_rand_int[17], command=lambda: check_if_correct_table(17),width=10)
     lab18.pack()
-    lab19=Label(can4, text="HI!!!",width=10,)
+    lab19=Button(can4, text=first_rand_int[18]*second_rand_int[18], command=lambda: check_if_correct_table(18),width=10,)
     lab19.pack()
-    lab20=Label(can4, text="HI!!!",width=10)
+    lab20=Button(can4, text=first_rand_int[19]*second_rand_int[19], command=lambda: check_if_correct_table(19),width=10)
     lab20.pack()
     can4.pack(side=LEFT)
-
     #number set 2
     can5=Canvas(One_Easy,width=100,height=70,bg='white')
-    lab21=Label(can5, text="HI!!!",width=10)
+    lab21=Button(can5, text=first_rand_int[20]*second_rand_int[20], command=lambda: check_if_correct_table(20), width=10)
     lab21.pack()
-    lab22=Label(can5, text="HI!!!",width=10)
+    lab22=Button(can5, text=first_rand_int[21]*second_rand_int[21], command=lambda: check_if_correct_table(21), width=10)
     lab22.pack()
-    lab23=Label(can5, text="HI!!!",width=10)
+    lab23=Button(can5, text=first_rand_int[22]*second_rand_int[22], command=lambda: check_if_correct_table(22), width=10)
     lab23.pack()
-    lab24=Label(can5, text="HI!!!",width=10,)
+    lab24=Button(can5, text=first_rand_int[23]*second_rand_int[23], command=lambda: check_if_correct_table(23), width=10,)
     lab24.pack()
-    lab25=Label(can5, text="HI!!!",width=10)
+    lab25=Button(can5, text=first_rand_int[24]*second_rand_int[24], command=lambda: check_if_correct_table(24), width=10)
     lab25.pack()
     can5.pack(side=LEFT)
 
+
+def check_if_correct_table(equation_number):
+    global first_rand_int, second_rand_int, equation_to_solve_number
+    if first_rand_int[equation_to_solve_number] * second_rand_int[equation_to_solve_number] == first_rand_int[equation_number] * second_rand_int[equation_number]:
+        print("HI")
 
 
 # defining windows
@@ -216,5 +227,6 @@ custom_game_button.grid(row=20, column=20)
 
 chosen_difficulty = StringVar()
 chosen_difficulty.set("")
+equation_to_solve = StringVar()
 
 root.mainloop()
