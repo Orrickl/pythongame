@@ -8,6 +8,7 @@ first_rand_int = []
 second_rand_int = []
 equation_to_solve_number = 0
 label_list = []
+equation_to_solve_number_list = []
 
 # defining functions
 def new_window(window_to_close, window_to_open):
@@ -82,7 +83,7 @@ def send_to_level(level_number):
 
 
 def generate_level(level_num):
-    global first_rand_int, second_rand_int, equation_to_solve_number, can1 , can2, can3, can4, can5
+    global first_rand_int, second_rand_int, equation_to_solve_number, equation_to_solve_number_list
     text1 = Label(One_Easy, textvariable=equation_to_solve, width=47, height=1, bg='grey')
     text1.pack()
     print("help")
@@ -91,13 +92,17 @@ def generate_level(level_num):
     first_and_second_product = 0
 
     for i in range(25):
-        first_rand_int.append(random.randint(1,12))
-        second_rand_int.append(random.randint(1,12))
+        first_rand_int.append(random.randint(1, 12))
+        second_rand_int.append(random.randint(1, 12))
         first_and_second_product = first_rand_int[i] * second_rand_int[i]
         random_integers_products.append(first_and_second_product)
-    equation_to_solve_number = random.randint(0,24)
-    equation_to_solve.set(str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
+        equation_to_solve_number_list.insert(i, i)
 
+    equation_to_solve_number = random.randint(0, 24)
+    equation_to_solve.set(str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
+    equation_to_solve_number_list.pop(equation_to_solve_number)
+
+    print(equation_to_solve_number_list)
     print(first_rand_int)
     print(second_rand_int)
     print(random_integers_products)
@@ -193,10 +198,23 @@ def generate_level(level_num):
 
 
 def check_if_correct_table(equation_number):
-    global first_rand_int, second_rand_int, equation_to_solve_number
+    global equation_to_solve_number
     print("hi")
     if first_rand_int[equation_to_solve_number] * second_rand_int[equation_to_solve_number] == first_rand_int[equation_number] * second_rand_int[equation_number]:
         label_list[equation_number]["state"] = "disabled"
+        label_list[equation_number]["bg"] = "red"
+        equation_to_solve_number = random.choice(equation_to_solve_number_list)
+        equation_to_solve.set(str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
+        print(equation_to_solve_number)
+        print(equation_to_solve_number_list)
+        equation_to_solve_number_list.pop(equation_to_solve_number)
+        print(equation_to_solve_number_list)
+        check_if_five_in_row(label_list[equation_number])
+
+
+def check_if_five_in_row(label_num):
+    print(label_num)
+
 
 
 
