@@ -9,6 +9,7 @@ second_rand_int = []
 equation_to_solve_number = 0
 label_list = []
 equation_to_solve_number_list = []
+a = 0
 
 # defining functions
 def new_window(window_to_close, window_to_open):
@@ -102,11 +103,6 @@ def generate_level(level_num):
     equation_to_solve.set(str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
     equation_to_solve_number_list.pop(equation_to_solve_number)
 
-    print(equation_to_solve_number_list)
-    print(first_rand_int)
-    print(second_rand_int)
-    print(random_integers_products)
-
     can1=Canvas(One_Easy,width=100,height=70,bg='white')
     lab1=Button(can1, text=first_rand_int[0]*second_rand_int[0], command=lambda: check_if_correct_table(0), width=10)
     lab1.pack()
@@ -199,21 +195,31 @@ def generate_level(level_num):
 
 def check_if_correct_table(equation_number):
     global equation_to_solve_number
-    print("hi")
     if first_rand_int[equation_to_solve_number] * second_rand_int[equation_to_solve_number] == first_rand_int[equation_number] * second_rand_int[equation_number]:
         label_list[equation_number]["state"] = "disabled"
         label_list[equation_number]["bg"] = "red"
+
         equation_to_solve_number = random.choice(equation_to_solve_number_list)
         equation_to_solve.set(str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
         print(equation_to_solve_number)
         print(equation_to_solve_number_list)
-        equation_to_solve_number_list.pop(equation_to_solve_number)
+        i = 0
+        while True:
+            i += 1
+            if equation_to_solve_number_list[i] == equation_to_solve_number:
+                print(equation_to_solve_number_list[i])
+                equation_to_solve_number_list.pop(i)
+                break
+
+
         print(equation_to_solve_number_list)
+
         check_if_five_in_row(label_list[equation_number])
 
 
 def check_if_five_in_row(label_num):
-    print(label_num)
+    print("hi")
+
 
 
 
