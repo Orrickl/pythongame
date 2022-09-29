@@ -203,15 +203,13 @@ def check_if_correct_table(equation_number):
         equation_to_solve.set(str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
         print(equation_to_solve_number)
         print(equation_to_solve_number_list)
-        i = 0
+        i = -1
         while True:
             i += 1
             if equation_to_solve_number_list[i] == equation_to_solve_number:
                 print(equation_to_solve_number_list[i])
                 equation_to_solve_number_list.pop(i)
                 break
-
-
         print(equation_to_solve_number_list)
 
         check_if_five_in_row(label_list[equation_number])
@@ -219,9 +217,14 @@ def check_if_correct_table(equation_number):
 
 def check_if_five_in_row(label_num):
     print("hi")
-
-
-
+    for i in range(0, 21, 5):
+        print(i)
+        if i not in equation_to_solve_number_list and i+1 not in equation_to_solve_number_list and 1+2 not in equation_to_solve_number_list and i+3 not in equation_to_solve_number_list and i+4 not in equation_to_solve_number_list:
+            equation_to_solve.set("congratulations")
+        elif 0 not in equation_to_solve_number_list and 6 not in equation_to_solve_number_list and 12 not in equation_to_solve_number_list and 18 not in equation_to_solve_number_list and 24 not in equation_to_solve_number_list:
+            equation_to_solve.set("congratulations")
+        elif 4 not in equation_to_solve_number_list and 8 not in equation_to_solve_number_list and 12 not in equation_to_solve_number_list and 16 not in equation_to_solve_number_list and 20 not in equation_to_solve_number_list:
+            equation_to_solve.set("congratulations")
 
 
 # defining windows
