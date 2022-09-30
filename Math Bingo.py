@@ -26,8 +26,14 @@ def generate_level():
         equation_to_solve_number_list
 
     # clears the button list so that if it is the second or more time doing bingo it resets
-    button_list.clear()
 
+    random_integers.clear()
+    random_integers_products.clear()
+    first_rand_int.clear()
+    second_rand_int.clear()
+    equation_to_solve_number = 0
+    button_list.clear()
+    equation_to_solve_number_list.clear()
     # destroys the bingo menu so that if it is second or more time doing bingo it resets
     bingo_menu.destroy()
     # recreates the bingo menu so that it can be used again
@@ -192,117 +198,147 @@ def generate_level():
     button_list.append(button_twentyfive)
     row_five_button_canvas.pack(side=LEFT)
 
-    #
+    # create back button, so I can leave the bingo menu and go back to the main menu
     back_button = Button(bingo_menu, text="Back", font="Helvetica 15", command=lambda: back(bingo_menu, main_menu),
                          fg="red")
     back_button.pack(side=BOTTOM, padx=20)
 
 
+# function that checks if the button you press is the correct one
 def check_if_correct_table(equation_number):
     global equation_to_solve_number, equation_to_solve
-    print(str(equation_number) + " = equation number")
+    # checks if the button you press is the correct one
     if equation_to_solve_number == equation_number:
+        # make you the button pressed red and unusable if it was right so people know they got it right
         button_list[equation_number]["state"] = "disabled"
         button_list[equation_number]["bg"] = "red"
+        # calls function to see if there are 5 in a row
         check_if_five_in_row(button_list[equation_number])
+        # generate a new equation to solve number then delete it from the list
         equation_to_solve_number = random.choice(equation_to_solve_number_list)
         equation_to_solve_number_list.remove(equation_to_solve_number)
+        # sets the label at the top to a new maths problem
         equation_to_solve.set(
             str(first_rand_int[equation_to_solve_number]) + "x" + str(second_rand_int[equation_to_solve_number]))
 
 
 def check_if_five_in_row(label_num):
+    # check if there is a five in a row in a column
+    # 5 in a row detection failure one
     for i in range(0, 21, 5):
         if i not in equation_to_solve_number_list and \
                 i + 1 not in equation_to_solve_number_list \
                 and i + 2 not in equation_to_solve_number_list \
                 and i + 3 not in equation_to_solve_number_list \
                 and i + 4 not in equation_to_solve_number_list:
-            print("column")
+            # turns winning grid squares yellow
             button_list[i]["bg"] = "yellow"
             button_list[i + 1]["bg"] = "yellow"
             button_list[i + 2]["bg"] = "yellow"
             button_list[i + 3]["bg"] = "yellow"
             button_list[i + 4]["bg"] = "yellow"
+            # calls function that tells the user that they have won and gives them options to return back
             won_bingo()
+    # check if there is a five in a row in a row
+    # 5 in a row detection failure two
     for i in range(0, 5):
         if i not in equation_to_solve_number_list and \
                 i + 5 not in equation_to_solve_number_list \
                 and i + 10 not in equation_to_solve_number_list \
                 and i + 15 not in equation_to_solve_number_list \
                 and i + 20 not in equation_to_solve_number_list:
-            print("row")
+            # turns winning grid squares yellow
             button_list[i]["bg"] = "yellow"
             button_list[i + 5]["bg"] = "yellow"
             button_list[i + 10]["bg"] = "yellow"
             button_list[i + 15]["bg"] = "yellow"
             button_list[i + 20]["bg"] = "yellow"
+            # calls function that tells the user that they have won and gives them options to return back
             won_bingo()
+    # check if there is a five in a row in top left to bottom right diagonal
     if 0 not in equation_to_solve_number_list \
             and 6 not in equation_to_solve_number_list \
             and 12 not in equation_to_solve_number_list \
             and 18 not in equation_to_solve_number_list \
             and 24 not in equation_to_solve_number_list:
-        print("diagnol top left")
+        # turns winning grid squares yellow
         button_list[0]["bg"] = "yellow"
         button_list[6]["bg"] = "yellow"
         button_list[12]["bg"] = "yellow"
         button_list[18]["bg"] = "yellow"
         button_list[24]["bg"] = "yellow"
+        # calls function that tells the user that they have won and gives them options to return back
         won_bingo()
-
+    # check if there is a five in a row in top right to bottom left diagonal
     elif 4 not in equation_to_solve_number_list \
             and 8 not in equation_to_solve_number_list \
             and 12 not in equation_to_solve_number_list \
             and 16 not in equation_to_solve_number_list \
             and 20 not in equation_to_solve_number_list:
-        print("diagnol bottom right")
+        # turns winning grid squares yellow
         button_list[4]["bg"] = "yellow"
         button_list[8]["bg"] = "yellow"
         button_list[12]["bg"] = "yellow"
         button_list[16]["bg"] = "yellow"
         button_list[20]["bg"] = "yellow"
+        # calls function that tells the user that they have won and gives them options to return back
         won_bingo()
 
 
 def won_bingo():
+    # sets the top label to you won letting the user know they have won
     equation_to_solve.set("You Won!!!")
-
+    # asks the user whether of not they want to play again
     continue_label = Label(bingo_menu, text="Play again?", font="Helvetica 15")
     continue_label.pack()
+    # creates a button which lets the user start another game of bingo if they want
     continue_button = Button(bingo_menu, text="Yes!", font="Helvetica 15",
                              command=lambda: generate_level())
+    # creates a button which the user can use to quit the game
     continue_button.pack(side=BOTTOM)
     back_to_home_button = Button(bingo_menu, text="No", font="Helvetica 15",
-                                 command=lambda: back(bingo_menu, main_menu))
+                                 command=lambda: quit())
     back_to_home_button.pack(side=BOTTOM)
 
 
-# defining windows
+# defining and configuring main window
 root = Tk()
+# smaller window level selection menu
+# smaller window bingo board
+# smaller window 4
+#smaller main_menu 1
 root.geometry('650x330')
 root.configure(bg='cyan')
 
+# defining and configuring the menu frame
 main_menu = Frame(root)
 main_menu.configure(bg="cyan")
 main_menu.grid(row=0, column=0)
 
+# defining and configuring the bingo frame
 bingo_menu = Frame(root)
 bingo_menu.grid(row=0, column=0)
 bingo_menu.grid_forget()
 
-# defining buttons and labels
+# defining welcome label
 game_label = Label(main_menu, text="Welcome To Math Bingo!", font="Helvetica 40 bold")
 game_label.configure(bg="cyan")
 game_label.grid(row=0, column=0)
 
+# bigger buttons level selection
+# creating button which will start a game
 play_button = Button(main_menu, text="Play!", font="Helvetica 25",
                      command=lambda: generate_level())
+# main_menu button different placing 1
 play_button.grid(row=3, column=0, pady=50)
 
+# creating a button the user can use to quit
 quit_button = Button(main_menu, text="Quit", font="Helvetica 25", command=lambda: quit())
+# main_menu button different placing 2
 quit_button.grid(row=6, column=0)
 
+# setting up a string variable
 equation_to_solve = StringVar()
 
+# ending main loop code
 root.mainloop()
